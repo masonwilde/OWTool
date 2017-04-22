@@ -1,12 +1,19 @@
+body{
+	background-color: #0f0f0f;
+}
+
 h1,p{
 	text-align:center;
+	color: #dddddd
 }
 
 li {
-	padding: 7px;
+	padding: 5px;
 	margin:2px;
 	background-color: grey;
-	width:300px;
+	width:auto;
+	text-align: center;
+	font-size: 200%;
 }
 .fileinput{
 	margin: 0 auto;
@@ -23,14 +30,53 @@ li {
 .playerblock {
 	margin-left: auto;
 	margin-right:auto;
+	height:10%;
+	width:50%;
 }
 
 .users{
 	text-align:center;
 }
 
+.users img{
+	height:100%;
+}
+
 .users > ol{
 	list-style-type: :none;
+}
+
+.users > ol > li{
+	height:auto;
+	width:50%;
+}
+
+.users .grandmaster{
+	background-color: #dddddd;
+}
+
+.users .master{
+	background-color: #dddddd;
+}
+
+.users .diamond{
+	background-color: #dddddd;
+}
+
+.users .platinum{
+	background-color: #dddddd;
+}
+
+.users .gold{
+	background-color: #dddddd;
+}
+
+.users .silver{
+	background-color: #dddddd;
+}
+
+.users .bronze{
+	background-color: #dddddd;
 }
 
 .divider{

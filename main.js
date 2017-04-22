@@ -7,7 +7,7 @@ var listofPlayerData =[];
 
 function updateData(){
 	$("#users").empty();
-	
+
 	var counter = 1;
 	listofPlayerData.map((x) =>{
 		rankTier="bronze";
@@ -18,14 +18,16 @@ function updateData(){
 		else if(rank>=2500){rankTier = "platinum";}
 		else if(rank>=2000){rankTier = "gold";}
 		else if(rank>=1500){rankTier = "silver";}
-		$("#users").append("<li class=\"playerblock\">" + "<div class=\"" + rankTier + " playerblock\">" + "#" + counter + " " + x.username + " : " + x.rank + "</div></li>");
+		$("#users").append("<li class=\"" + rankTier + " playerblock\">" +
+		 	 "#" + counter + " <img src=\"" + x.img + "\"/>"+ x.username + " : "
+			 + x.rank + "</li>");
 		counter++;
 	});
 }
 
 function addToData(data){
 	console.log(data);
-	listofPlayerData.push({username: data.username, rank: data.competitive.rank});
+	listofPlayerData.push({username: data.username, rank: data.competitive.rank, img: data.competitive.rank_img});
 	listofPlayerData.sort(function(a,b){return b.rank - a.rank});
 	updateData();
 }
