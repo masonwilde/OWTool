@@ -16,10 +16,12 @@
 	</head>
 
 	<body>
-
-		<div>
-			<h1 style="text-align:center;">Overwatch Tool</h1>
+			<div class="header">
+				<h1>Overwatch Group Making Tool</h1>
+				<p>Click on a player to see acceptable groupmates for competitive<p>
+			</div>
 			<div class="fileinput">
+				<h2>Add Players to the List</h2>
 				<p>Enter a username</p>
 
 				<input type="text" id="textbox" name="text[]" value="Varotyk#1909" style="margin-left:auto;margin-right:auto;" single />
@@ -32,7 +34,7 @@
 				</script>
 				<div class="divider"></div>
 				<p>Enter a file</p>
-				<input type="file" id="files" name="files[]" multiple />
+				<input type="file" id="files" name="files[]" style="background-color:#dddddd;border-radius:3px;" multiple />
 				<output id="list"></output>
 				<script src="fileInput.js"></script>
 			</div>
@@ -40,13 +42,12 @@
 			<div>
 				<p id="prompter">Please enter a username or file of names</p>
 				<ol class="users" id="users" style="list-style-type:none;">
-
 				</ol>
+				<script src="rankcheck.js"></script>
 			</div>
 			<div class="docs">
 				<p>docs</p>
 			</div>
-		</div>
 
 	</body>
 

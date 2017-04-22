@@ -4,10 +4,14 @@ Retrieves and compiles overwatch data for players
 
 var listOfPlayers = [];
 var listofPlayerData =[];
+var activeRank = 0;
+var activeUser = "Varotyk";
+var checkRank = false;
+
 
 function updateData(){
 	$("#users").empty();
-
+	$("#prompter").empty();
 	var counter = 1;
 	listofPlayerData.map((x) =>{
 		rankTier="bronze";
@@ -18,15 +22,41 @@ function updateData(){
 		else if(rank>=2500){rankTier = "platinum";}
 		else if(rank>=2000){rankTier = "gold";}
 		else if(rank>=1500){rankTier = "silver";}
-		$("#users").append("<li class=\"" + rankTier + " playerblock\">" +
+		if(checkRank){
+			if(activeUser==x.username){
+				rankTier += " active";
+			}
+			else if((activeRank>=3500 || x.rank>=3500) && Math.abs(activeRank-x.rank)<=500) {
+				rankTier += " cangroup";
+			}
+			else if(activeRank<=3499 && x.rank<=3499 && Math.abs(activeRank-x.rank)<=1000){
+				rankTier += " cangroup"
+			}
+		}
+		$("#users").append("<li class=\"" + rankTier + " playerblock\" id=\""
+			 + x.username + "\" rank=\"" + x.rank + "\" onclick=\"clicked(" + x.rank + ", " + x.username + ")\">" +
 		 	 "#" + counter + " <img src=\"" + x.img + "\"/>"+ x.username + " : "
 			 + x.rank + "</li>");
 		counter++;
 	});
 }
 
+function clicked(rank, user){
+	if(checkRank && activeUser == user){
+		checkRank = !checkRank;
+
+	}
+	else{
+		checkRank = true;
+		activeRank=rank;
+		activeUser = user.id;
+		console.log(activeUser, activeRank, rank);
+		updateData();
+	}
+}
+
 function addToData(data){
-	console.log(data);
+	//console.log(data);
 	listofPlayerData.push({username: data.username, rank: data.competitive.rank, img: data.competitive.rank_img});
 	listofPlayerData.sort(function(a,b){return b.rank - a.rank});
 	updateData();
@@ -35,7 +65,7 @@ function addToData(data){
 function addUser(){
 	newName = document.getElementById('textbox').value;
 	document.getElementById('textbox').value = '';
-	console.log(newName);
+	//console.log(newName);
 	newName = newName.replace('#', '-');
 	if(listOfPlayers.indexOf(newName == -1)){
 		$.get(
@@ -53,7 +83,7 @@ function addUser(){
 
 function addMany(string){
 	string = "" + string;
-	console.log(string);
+	//console.log(string);
 	newPlayers = string.split('\n');
 	newPlayers = cleanup(newPlayers);
 	for (var name in newPlayers){
@@ -76,10 +106,10 @@ function addMany(string){
 
 function cleanup(list){
 	list = list.map((x)=>{
-		console.log(x.replace('#','-'));
+		//console.log(x.replace('#','-'));
 		return x.replace('#', '-');
 		});
 	list.splice(list.length-1,1);
-	console.log(list);
+	//console.log(list);
 	return list;
 }

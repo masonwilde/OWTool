@@ -1,8 +1,8 @@
 body{
-	background-color: #0f0f0f;
+	background-color: #333333;
 }
 
-h1,p{
+h1,h2,p{
 	text-align:center;
 	color: #dddddd
 }
@@ -14,6 +14,7 @@ li {
 	width:auto;
 	text-align: center;
 	font-size: 200%;
+	border-radius: 5px;
 }
 .fileinput{
 	margin: 0 auto;
@@ -77,6 +78,14 @@ li {
 
 .users .bronze{
 	background-color: #dddddd;
+}
+
+.users .cangroup{
+	background-color: yellow;
+}
+
+.users .active{
+	background-color: green;
 }
 
 .divider{
