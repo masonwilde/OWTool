@@ -1,0 +1,38 @@
+h1,p{
+	text-align:center;
+}
+
+li {
+	padding: 7px;
+	margin:2px;
+	background-color: grey;
+	width:300px;
+}
+.fileinput{
+	margin: 0 auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+.fileinput > input{
+	margin: 0 auto;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.playerblock {
+	margin-left: auto;
+	margin-right:auto;
+}
+
+.users{
+	text-align:center;
+}
+
+.users > ol{
+	list-style-type: :none;
+}
+
+.divider{
+	height:10px;
+}

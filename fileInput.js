@@ -17,6 +17,7 @@
 		return function(e) {
 			console.log(e.target.result);
 			addMany(e.target.result);
+			$("#prompter").empty();
 
 		};
 	  })(f);
