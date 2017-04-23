@@ -51,8 +51,13 @@ function clicked(rank, user){
 		currentQueue.splice(index, 1);
 	}
 	else if(currentQueue.length <6){
-		currentQueue.push({username: user.id, rank: rank})
-		//console.log(activeUser, activeRank, rank);
+		if(currentQueue.length>0 && !canQueueWith(rank)){
+			console.log("ineligible member");
+		}
+		else{
+			currentQueue.push({username: user.id, rank: rank})
+			//console.log(activeUser, activeRank, rank);
+		}
 	}
 	else{
 		console.log("Too many people");
