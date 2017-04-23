@@ -5,11 +5,13 @@ body{
 .banner {
   position: fixed;
   top: 0px;
-  left: 10px;
+  left: 50px;
   width: 200px;
   height: auto;
   background-color: #dddddd;
   text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .banner p{
