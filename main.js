@@ -42,17 +42,17 @@ function updateData(){
 }
 
 function clicked(rank, user){
-	if(checkRank && activeUser == user){
+	//console.log(activeUser, user.id, activeUser==user.id )
+	if(checkRank==true && (activeUser == user.id)){
 		checkRank = !checkRank;
-
 	}
 	else{
 		checkRank = true;
 		activeRank=rank;
 		activeUser = user.id;
-		console.log(activeUser, activeRank, rank);
-		updateData();
+		//console.log(activeUser, activeRank, rank);
 	}
+	updateData();
 }
 
 function addToData(data){
@@ -67,7 +67,8 @@ function addUser(){
 	document.getElementById('textbox').value = '';
 	//console.log(newName);
 	newName = newName.replace('#', '-');
-	if(listOfPlayers.indexOf(newName == -1)){
+	//console.log(listOfPlayers.indexOf(newName == -1);
+	if(listOfPlayers.indexOf(newName) == -1){
 		$.get(
 		"https://overwatch-api-ku.herokuapp.com/profile/pc/us/" + newName,
 		addToData,
@@ -89,7 +90,7 @@ function addMany(string){
 	for (var name in newPlayers){
 		//var string = "<p>" + newList[name] + "</p>\n";
 		//$("#table").append(string);
-		if(listOfPlayers.indexOf(newPlayers[name] == -1)){
+		if(listOfPlayers.indexOf(newPlayers[name]) == -1){
 			$.get(
 			"https://overwatch-api-ku.herokuapp.com/profile/pc/us/" + newPlayers[name],
 	  	 	addToData,
@@ -116,10 +117,10 @@ function cleanup(list){
 
 
 function addKU(){
-	console.log("CLICKED");
+	//console.log("CLICKED");
 	$.get(
 	"http://masonwilde.github.io/OWTool/KUOWCommunity.txt",
 	addMany,
 	"text");
-	console.log("AFTER");
+	//console.log("AFTER");
 }
