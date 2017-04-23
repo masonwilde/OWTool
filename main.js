@@ -37,6 +37,7 @@ function updateData(){
 		 	 "#" + counter + " <img src=\"" + x.img + "\"/>"+ x.username + " : "
 			 + x.rank + "</li>");
 		counter++;
+
 	});
 }
 
@@ -47,7 +48,14 @@ function clicked(rank, user){
 	}, false)){
 		//TODO fix this part,
 		//never mind it works?
-		var index = currentQueue.indexOf({username: user.id, rank: rank});
+		var searchTerm = user.id,
+	    index = -1;
+		for(var i = 0, len = currentQueue.length; i < len; i++) {
+		    if (currentQueue[i].username === searchTerm) {
+		        index = i;
+		        break;
+	    }
+}
 		currentQueue.splice(index, 1);
 	}
 	else if(currentQueue.length <6){
@@ -64,6 +72,7 @@ function clicked(rank, user){
 	}
 	checkRank = currentQueue.length != 0;
 	updateData();
+	updateBanner();
 }
 
 function addToData(data){
@@ -151,4 +160,26 @@ function canQueueWith(rank){
 		}
 	}, true);
 	return canQueue;
+}
+
+function updateBanner(){
+	console.log("updatign banner");
+	$('#groupsize').empty()
+	$('#groupsize').append("" + currentQueue.length + "/6");
+
+	var aveRank = 0;
+	if(currentQueue.length>0){
+		aveRank = currentQueue.reduce((acc,val)=>{
+			return(acc + val.rank);
+		}, 0);
+		aveRank = Math.round(aveRank/currentQueue.length);
+	}
+	else{
+		aveRank = 0;
+	}
+
+	$('#averank').empty();
+	$('#averank').append( aveRank);
+
+
 }

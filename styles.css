@@ -2,6 +2,21 @@ body{
 	background-color: #333333;
 }
 
+.banner {
+  position: fixed;
+  top: 0px;
+  left: 10px;
+  width: 200px;
+  height: auto;
+  background-color: #dddddd;
+  text-align: center;
+}
+
+.banner p{
+	color: #0f0f0f;
+	font-size: 20px
+}
+
 h1,h2,p{
 	text-align:center;
 	color: #dddddd
