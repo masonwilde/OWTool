@@ -113,3 +113,13 @@ function cleanup(list){
 	//console.log(list);
 	return list;
 }
+
+
+function addKU(){
+	console.log("CLICKED");
+	$.get(
+	"http://masonwilde.github.io/OWTool/KUOWCommunity.txt",
+	addMany,
+	"text");
+	console.log("AFTER");
+}
