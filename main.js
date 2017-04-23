@@ -7,7 +7,7 @@ var listofPlayerData =[];
 var activeRank = 0;
 var activeUser = "Varotyk";
 var checkRank = false;
-
+var currentQueue = [];
 
 function updateData(){
 	$("#users").empty();
@@ -23,14 +23,13 @@ function updateData(){
 		else if(rank>=2000){rankTier = "gold";}
 		else if(rank>=1500){rankTier = "silver";}
 		if(checkRank){
-			if(activeUser==x.username){
+			if(currentQueue.reduce((acc,val)=>{
+				return (acc || (val.username == x.username));
+			}, false)){
 				rankTier += " active";
 			}
-			else if((activeRank>=3500 || x.rank>=3500) && Math.abs(activeRank-x.rank)<=500) {
+			else if(canQueueWith(rank)){
 				rankTier += " cangroup";
-			}
-			else if(activeRank<=3499 && x.rank<=3499 && Math.abs(activeRank-x.rank)<=1000){
-				rankTier += " cangroup"
 			}
 		}
 		$("#users").append("<li class=\"" + rankTier + " playerblock\" id=\""
@@ -43,15 +42,22 @@ function updateData(){
 
 function clicked(rank, user){
 	//console.log(activeUser, user.id, activeUser==user.id )
-	if(checkRank==true && (activeUser == user.id)){
-		checkRank = !checkRank;
+	if(currentQueue.reduce((acc,val)=>{
+		return (acc || (val.username == user.id));
+	}, false)){
+		//TODO fix this part,
+		//never mind it works?
+		var index = currentQueue.indexOf({username: user.id, rank: rank});
+		currentQueue.splice(index, 1);
 	}
-	else{
-		checkRank = true;
-		activeRank=rank;
-		activeUser = user.id;
+	else if(currentQueue.length <6){
+		currentQueue.push({username: user.id, rank: rank})
 		//console.log(activeUser, activeRank, rank);
 	}
+	else{
+		console.log("Too many people");
+	}
+	checkRank = currentQueue.length != 0;
 	updateData();
 }
 
@@ -123,4 +129,21 @@ function addKU(){
 	addMany,
 	"text");
 	//console.log("AFTER");
+}
+
+function canQueueWith(rank){
+	var canQueue = false;
+	canQueue = currentQueue.reduce((acc, val) =>{
+
+		if((rank>=3500 || val.rank>=3500) && Math.abs(rank-val.rank)<=500) {
+			return (acc && true);
+		}
+		else if(rank<=3499 && val.rank<=3499 && Math.abs(rank-val.rank)<=1000){
+			return (acc && true);
+		}
+		else{
+			return(acc && false);
+		}
+	}, true);
+	return canQueue;
 }
