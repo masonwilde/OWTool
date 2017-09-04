@@ -77,9 +77,11 @@ function clicked(rank, user){
 
 function addToData(data){
 	//console.log(data);
-	listofPlayerData.push({username: data.username, rank: data.competitive.rank, img: data.competitive.rank_img});
-	listofPlayerData.sort(function(a,b){return b.rank - a.rank});
-	updateData();
+	if (data.competitive.rank && data.username) {
+		listofPlayerData.push({username: data.username, rank: data.competitive.rank, img: data.competitive.rank_img});
+		listofPlayerData.sort(function(a,b){return b.rank - a.rank});
+		updateData();
+	}
 }
 
 function addUser(){
